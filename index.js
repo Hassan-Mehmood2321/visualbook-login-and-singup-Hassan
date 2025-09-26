@@ -1,58 +1,67 @@
 class User {
-    constructor(firstName, surname, contact, email, password, dob, gender) {
+    constructor(firstName, lastName, email, password) {
         this.firstName = firstName;
-        this.surname = surname;
-        this.contact = contact;
+        this.lastName = lastName;
+        this.fullName = firstName + " " + lastName;
         this.email = email;
         this.password = password;
-        this.dateOfBirth = dob;
-        this.gender = gender;
+    }
+}
+
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+function userSignUp(event) {
+    event.preventDefault();
+    let firstName = document.getElementById("firstName");
+    let lastName = document.getElementById("lastName");
+    let email = document.getElementById("email");
+    let password = document.getElementById("password");
+
+    const savedData = JSON.parse(localStorage.getItem("users")) || [];
+
+    let result = savedData.find((element) => element.email == email.value);
+    if (result?.email) {
+        alert("user already exist");
+    } else {
+        let user = new User(firstName.value, lastName.value, email.value, password.value);
+        users.push(user);
+        localStorage.setItem("users", JSON.stringify(users));
+        alert("Signup successful!");
+        window.location.href = "./../logine page visual/index.html";
     }
 }
 
 const signupForm = document.getElementById("signupForm");
 if (signupForm) {
-    signupForm.addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const firstName = document.getElementById("firstName").value;
-        const surname = document.getElementById("surname").value;
-        const contact = document.getElementById("contact").value;
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-        const day = document.getElementById("dob-day").value;
-        const month = document.getElementById("dob-month").value;
-        const year = document.getElementById("dob-year").value;
-        const dob = `${day}-${month}-${year}`;
-        const gender = document.querySelector('input[name="gender"]:checked')?.value || "";
-
-        const newUser = new User(firstName, surname, contact, email, password, dob, gender);
-        localStorage.setItem("user", JSON.stringify(newUser));
-        window.location.href = "./../logine page visual/index.html";
-    });
+    signupForm.addEventListener("submit", userSignUp);
 }
 
-// Login form handling
 const loginForm = document.querySelector(".form-section form");
 if (loginForm) {
     loginForm.addEventListener("submit", function (e) {
         e.preventDefault();
 
-        const contactInput = loginForm.querySelector('input[type="text"]').value;
+        const emailInput = loginForm.querySelector('input[type="text"]').value;
         const passwordInput = loginForm.querySelector('input[type="password"]').value;
 
-        // Get user from localStorage
-        const storedUser = JSON.parse(localStorage.getItem("user"));
+        const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
+        const foundUser = storedUsers.find(
+            (user) => user.email === emailInput && user.password === passwordInput
+        );
 
-        // Allow login with contact OR email and password must match
-        if (
-            storedUser &&
-            (storedUser.contact === contactInput || storedUser.email === contactInput) &&
-            storedUser.password === passwordInput
-        ) {
+        if (foundUser) {
             alert("Congratulations! You have successfully logged in.");
         } else {
-            alert(" Invalid login credentials. Try again.");
+            alert("Invalid login credentials. Try again.");
         }
     });
 }
+
+const usersData = [
+    { name: 'arham', age: 24 },
+    { name: "Hassan", age: 17 },
+    { name: 'Haris', age: 20 }
+];
+
+let result = usersData.find((element) => element.name == "arham");
+console.log(result);
