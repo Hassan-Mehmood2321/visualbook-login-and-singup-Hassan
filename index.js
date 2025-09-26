@@ -1,4 +1,3 @@
-// User class
 class User {
     constructor(firstName, surname, contact, email, password, dob, gender) {
         this.firstName = firstName;
@@ -11,7 +10,6 @@ class User {
     }
 }
 
-// Signup form handling
 const signupForm = document.getElementById("signupForm");
 if (signupForm) {
     signupForm.addEventListener("submit", function (e) {
@@ -29,10 +27,7 @@ if (signupForm) {
         const gender = document.querySelector('input[name="gender"]:checked')?.value || "";
 
         const newUser = new User(firstName, surname, contact, email, password, dob, gender);
-
         localStorage.setItem("user", JSON.stringify(newUser));
-
-        // Redirect to login page after signup
         window.location.href = "./../logine page visual/index.html";
     });
 }
@@ -55,9 +50,9 @@ if (loginForm) {
             (storedUser.contact === contactInput || storedUser.email === contactInput) &&
             storedUser.password === passwordInput
         ) {
-            alert("🎉 Congratulations! You have successfully logged in.");
+            alert("Congratulations! You have successfully logged in.");
         } else {
-            alert("❌ Invalid login credentials. Try again.");
+            alert(" Invalid login credentials. Try again.");
         }
     });
 }
