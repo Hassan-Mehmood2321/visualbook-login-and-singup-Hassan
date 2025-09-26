@@ -14,25 +14,36 @@
       </p>
       <form method="POST" id="signupForm">
         <div class="name-fields">
-          <input type="text" id="firstName" placeholder="First name" required />
-          <input type="text" id="surname" placeholder="Surname" required />
+          <input
+            type="text"
+            id="firstName"
+            placeholder="First name"
+            required=""
+            autofocus=""
+          />
+          <input type="text" id="surname" placeholder="Surname" required="" />
         </div>
         <input
           type="text"
           id="contact"
           placeholder="Mobile number or email"
-          required
-        /><input type="email" id="email" placeholder="Email address" required />
+          required=""
+        /><input
+          type="email"
+          id="email"
+          placeholder="Email address"
+          required=""
+        />
         <input
           type="password"
           id="password"
           placeholder="New password"
-          required
+          required=""
         />
 
         <label>Date of birth</label>
         <div class="dob-fields">
-          <select id="dob-day" required>
+          <select id="dob-day" required="">
             <option value="">Day</option>
             <!-- Days 1-31 -->
             <!-- Add full range in final version -->
@@ -104,12 +115,12 @@
           </select>
         </div>
 
-        <a href="./../logine page visual/index.html"
+        <a href="./logine page visual/index.html" id="loginLink"
           >Already have an account? Log in</a
         >
         <button type="submit">Sign Up</button>
       </form>
     </div>
-    <script src="./../index.js"></script>
+    <script src="./index.js"></script>
   </body>
 </html>
